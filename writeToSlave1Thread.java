@@ -15,13 +15,11 @@ public class writeToSlave1Thread extends Thread{
 	public void run() {
 		while (jobs4slave1.peek() == null);
 		while (!jobs4slave1.peek().equals("client finished")) {
-//			if (jobs4slave1.peek().equals(null)){
-//				jobs4slave1.poll();
-//			} else {
-				System.out.println("Sending job " + jobs4slave1.peek() +" to Slave1");
-				pw.println(jobs4slave1.poll());
-				while (jobs4slave1.peek() == null);
-//			}
+			
+			System.out.println("Sending job " + jobs4slave1.peek() +" to Slave1");
+			pw.println(jobs4slave1.poll());
+			while (jobs4slave1.peek() == null);
+			
 		}
 		
 	}
