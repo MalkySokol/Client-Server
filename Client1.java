@@ -28,49 +28,49 @@ public class Client1 {
         	PrintWriter writeToMaster = new PrintWriter(client1.getOutputStream(), true);
         	BufferedReader readFromMaster = new BufferedReader(new InputStreamReader(client1.getInputStream()));	
         	){
-        	System.out.println("Client1 Socket Connected\n");
-        	
-        	Queue <String> jobsQueue = new Queue<String>();
-        	
-        	Thread write2Master = new client1WriteToMaster(writeToMaster, jobsQueue);
-        	Thread c1ReadFromMaster = new c1ReadFromMaster(readFromMaster);
-        	write2Master.start();
-        	c1ReadFromMaster.start();
-        	
-        	Scanner input = new Scanner(System.in);
-        	int counter = 1;
-        	String currJob;
-        	
-        	System.out.println("Enter -1 to quit\n");
-        	
-        	do {
-	        	System.out.println("Enter job type (a/b): ");
-	        	currJob = input.nextLine().toLowerCase();
-	        	
-	        	if (currJob.equals("-1")) {
-	        		continue;
-	        	}
-	        	
-	        	while(currJob.equals("a") && currJob.equals("b")) {
-	        		System.out.println("Invalid Entry!\n Enter job type (a/b): ");
-	        		currJob = input.nextLine().toLowerCase();
-	        	}
-	        		        	
-	        	currJob += counter;
-	        	jobsQueue.enqueue(currJob);
-	        	counter += 2;
-	        	
-        	} while (!currJob.equals("-1"));
-        	
-        	jobsQueue.enqueue("client finished");
-        	
-        	try {
-        		write2Master.join();
-        		c1ReadFromMaster.join();
-        	}
-		catch (InterruptedException e) {
-			System.out.println(e.getMessage());
-		}        	
+			System.out.println("Client1 Socket Connected\n");
+
+			Queue <String> jobsQueue = new Queue<String>();
+
+			Thread write2Master = new client1WriteToMaster(writeToMaster, jobsQueue);
+			Thread c1ReadFromMaster = new c1ReadFromMaster(readFromMaster);
+			write2Master.start();
+			c1ReadFromMaster.start();
+
+			Scanner input = new Scanner(System.in);
+			int counter = 1;
+			String currJob;
+
+			System.out.println("Enter -1 to quit\n");
+
+			do {
+				System.out.println("Enter job type (a/b): ");
+				currJob = input.nextLine().toLowerCase();
+
+				if (currJob.equals("-1")) {
+					continue;
+				}
+
+				while(currJob.equals("a") && currJob.equals("b")) {
+					System.out.println("Invalid Entry!\n Enter job type (a/b): ");
+					currJob = input.nextLine().toLowerCase();
+				}
+
+				currJob += counter;
+				jobsQueue.enqueue(currJob);
+				counter += 2;
+
+			} while (!currJob.equals("-1"));
+
+			jobsQueue.enqueue("client finished");
+
+			try {
+				write2Master.join();
+				c1ReadFromMaster.join();
+			}
+			catch (InterruptedException e) {
+				System.out.println(e.getMessage());
+			}        	
         	
         	}catch (UnknownHostException e) {
             	System.err.println("Don't know about host " + hostName);
