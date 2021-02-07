@@ -19,7 +19,8 @@ public class slave2RWToMaster extends Thread{
 				System.out.println("Reading job " + job + " in Slave2wrToMaster");
 				if(job.equals(null)) {
 					continue;
-				} else {
+				} 
+				else {
 					if (job.charAt(0) == 'b') {
 						System.out.println("Sleeping 2 secs");
 						sleep(2000); //opt job
@@ -31,8 +32,6 @@ public class slave2RWToMaster extends Thread{
 						pw.println(job);
 						System.out.println("Sending job "+job+" to Master");
 					}
-//					pw.println(job);
-//					System.out.println("Sending job "+job+" to Master");
 				}
 			}
 		} catch (IOException e) {
