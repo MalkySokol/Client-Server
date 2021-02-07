@@ -19,22 +19,22 @@ public class Master {
 		int portNumber = Integer.parseInt(args[0]);
 		
 		try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(args[0]));
-				Socket slaveSocket1 = serverSocket.accept();
-				PrintWriter slaveWriter1 = new PrintWriter(slaveSocket1.getOutputStream(), true);
-				BufferedReader slaveReader1 = new BufferedReader(new InputStreamReader(slaveSocket1.getInputStream()));
+		Socket slaveSocket1 = serverSocket.accept();
+		PrintWriter slaveWriter1 = new PrintWriter(slaveSocket1.getOutputStream(), true);
+		BufferedReader slaveReader1 = new BufferedReader(new InputStreamReader(slaveSocket1.getInputStream()));
 				
-				Socket slaveSocket2 = serverSocket.accept();
-				PrintWriter slaveWriter2 = new PrintWriter(slaveSocket2.getOutputStream(), true);
-				BufferedReader slaveReader2 = new BufferedReader(new InputStreamReader(slaveSocket2.getInputStream()));
+		Socket slaveSocket2 = serverSocket.accept();
+		PrintWriter slaveWriter2 = new PrintWriter(slaveSocket2.getOutputStream(), true);
+		BufferedReader slaveReader2 = new BufferedReader(new InputStreamReader(slaveSocket2.getInputStream()));
 				
-				Socket client1 = serverSocket.accept();
-				PrintWriter clientWriter1 = new PrintWriter(client1.getOutputStream(), true);
-				BufferedReader clientReader1 = new BufferedReader(new InputStreamReader(client1.getInputStream()));
+		Socket client1 = serverSocket.accept();
+		PrintWriter clientWriter1 = new PrintWriter(client1.getOutputStream(), true);
+		BufferedReader clientReader1 = new BufferedReader(new InputStreamReader(client1.getInputStream()));
 				
-				Socket client2 = serverSocket.accept();
-				PrintWriter clientWriter2 = new PrintWriter(client2.getOutputStream(), true);
-				BufferedReader clientReader2 = new BufferedReader(new InputStreamReader(client2.getInputStream()));
-				) {
+		Socket client2 = serverSocket.accept();
+		PrintWriter clientWriter2 = new PrintWriter(client2.getOutputStream(), true);
+		BufferedReader clientReader2 = new BufferedReader(new InputStreamReader(client2.getInputStream()));
+		) {
 			
 			System.out.println("Master Socket Connected\n");
 
@@ -116,11 +116,10 @@ public class Master {
 				System.out.println(e.getMessage());
 			}
 
-				} catch (IOException e) {
-					System.out.println(
-							"Exception caught when trying to listen on port " + portNumber + " or listening for a connection");
-					System.out.println(e.getMessage());
-				}
+			} catch (IOException e) {
+				System.out.println("Exception caught when trying to listen on port " + portNumber + " or listening for a connection");
+				System.out.println(e.getMessage());
+			}
 	}//close main brace 
 	
 }//end Master Class
