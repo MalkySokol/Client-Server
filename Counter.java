@@ -5,15 +5,15 @@ public class Counter {
 		int number;
 
 		public Counter(int number) {
-		this.number = number;
+			this.number = number;
 		}
 
 		public void set(int number) {
-		this.number = number;
+			this.number = number;
 		}
 
 		public int get() {
-		return this.number;
+			return this.number;
 		}
 		
 		public void increment() {
