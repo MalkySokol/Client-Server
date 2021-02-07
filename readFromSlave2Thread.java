@@ -31,7 +31,8 @@ public class readFromSlave2Thread extends Thread{
 				}
 				
 				while ((completedJob = br.readLine()).equals(null)); //check again and spin
-}
+			}
+			
 		} catch (IOException e) {
 			System.out.println("readfromslave2thread IOException");
 		}
