@@ -21,13 +21,13 @@ public class Client1 {
 		}
 		
 		String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+                int portNumber = Integer.parseInt(args[1]);
         
-        try(
+        	try(
         	Socket client1 = new Socket(hostName, portNumber);
         	PrintWriter writeToMaster = new PrintWriter(client1.getOutputStream(), true);
         	BufferedReader readFromMaster = new BufferedReader(new InputStreamReader(client1.getInputStream()));	
-        		){
+        	){
         	System.out.println("Client1 Socket Connected\n");
         	
         	Queue <String> jobsQueue = new Queue<String>();
@@ -67,13 +67,14 @@ public class Client1 {
         	try {
         		write2Master.join();
         		c1ReadFromMaster.join();
-        	}catch (InterruptedException e) {
-				System.out.println(e.getMessage());
-			}        	
+        	}
+		catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+		}        	
         	
-        }catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
+        	}catch (UnknownHostException e) {
+            	System.err.println("Don't know about host " + hostName);
+            	System.exit(1);
 		} catch (IOException e) {
 	            System.err.println("Couldn't get I/O for the connection to " +
 	                hostName);
