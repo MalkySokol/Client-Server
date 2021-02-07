@@ -21,62 +21,62 @@ public static void main(String[]args) throws ClassNotFoundException{
 		}
 		
 		String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        	int portNumber = Integer.parseInt(args[1]);
         
-        try(
+        	try(
         	Socket client2 = new Socket(hostName, portNumber);
         	PrintWriter writeToMaster = new PrintWriter(client2.getOutputStream(), true);
         	BufferedReader readFromMaster = new BufferedReader(new InputStreamReader(client2.getInputStream()));	
-        		){
-        	System.out.println("Client2 Socket Connected\n");
-        	
-        	
-        	Queue <String> jobsQueue = new Queue<String>();
-        	
-        	Thread write2Master = new client2WriteToMaster(writeToMaster, jobsQueue);
-        	Thread c2ReadFromMaster = new c2ReadFromMaster(readFromMaster);
-        	write2Master.start();
-        	c2ReadFromMaster.start();
-        	
-        	Scanner input = new Scanner(System.in);
-        	int counter = 0;
-        	String currJob;
-        	
-        	System.out.println("Enter -1 to quit\n");
-        	
-        	do {
-	        	System.out.println("Enter job type (a/b): ");
-	        	currJob = input.nextLine().toLowerCase();
-	        	
-	        	if (currJob.equals("-1")) {
-	        		continue;
-	        	}
-	        	
-	        	while(currJob.equals("a") && currJob.equals("b")) {
-	        		System.out.println("Invalid Entry!\n Enter job type (a/b): ");
-	        		currJob = input.nextLine().toLowerCase();
-	        	}
-	        		        	
-	        	currJob += counter;
-	        	jobsQueue.enqueue(currJob);
-	        	counter += 2;
-	        	
-        	} while (!currJob.equals("-1"));
-        	
-        	jobsQueue.enqueue("client finished");
-        	
-        	try {
-        		write2Master.join();
-        		c2ReadFromMaster.join();
-        	}catch (InterruptedException e) {
+        	){
+			System.out.println("Client2 Socket Connected\n");
+
+
+			Queue <String> jobsQueue = new Queue<String>();
+
+			Thread write2Master = new client2WriteToMaster(writeToMaster, jobsQueue);
+			Thread c2ReadFromMaster = new c2ReadFromMaster(readFromMaster);
+			write2Master.start();
+			c2ReadFromMaster.start();
+
+			Scanner input = new Scanner(System.in);
+			int counter = 0;
+			String currJob;
+
+			System.out.println("Enter -1 to quit\n");
+
+			do {
+				System.out.println("Enter job type (a/b): ");
+				currJob = input.nextLine().toLowerCase();
+
+				if (currJob.equals("-1")) {
+					continue;
+				}
+
+				while(currJob.equals("a") && currJob.equals("b")) {
+					System.out.println("Invalid Entry!\n Enter job type (a/b): ");
+					currJob = input.nextLine().toLowerCase();
+				}
+
+				currJob += counter;
+				jobsQueue.enqueue(currJob);
+				counter += 2;
+
+			} while (!currJob.equals("-1"));
+
+			jobsQueue.enqueue("client finished");
+
+			try {
+				write2Master.join();
+				c2ReadFromMaster.join();
+			}catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}    
-        	
+
         	       	
         	
-        }catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
+        	}catch (UnknownHostException e) {
+            	System.err.println("Don't know about host " + hostName);
+            	System.exit(1);
 		} catch (IOException e) {
 	            System.err.println("Couldn't get I/O for the connection to " +
 	                hostName);
