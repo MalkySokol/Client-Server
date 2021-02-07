@@ -3,9 +3,6 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Queue<T> implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Vector<T> jobs;
 	
@@ -18,14 +15,13 @@ public class Queue<T> implements Serializable{
 	}
 	
 	public boolean dequeue() {
-		//O(n) needs to shift all elements
 		if(!jobs.isEmpty()) {
-		jobs.remove(0);
-		return true;
-	}
-	else {
-		return false;
-	}
+			jobs.remove(0);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public T poll() {
@@ -41,11 +37,11 @@ public class Queue<T> implements Serializable{
 	
 	public T peek() {
 		if(jobs.isEmpty()) {
-		return null;
-	}
-	else {
-		return jobs.get(0);
-	}
+			return null;
+		}
+		else {
+			return jobs.get(0);
+		}
 	}
 	
 	
